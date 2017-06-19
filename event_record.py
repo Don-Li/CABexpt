@@ -76,7 +76,7 @@ class event_record(object):
             if extra_arrays != None:
                 for array in range(0, len(extra_arrays)):
                     writer.writerows( ((extra_array_names[array],),) )
-                    writer.writerows( ((extra_arrays[array],),) )
+                    writer.writerows( zip( extra_arrays[array] ) )
 
     def dropbox_sync( self ):
         upload_script = "/home/pi/Dropbox-Uploader/dropbox_uploader.sh upload "
