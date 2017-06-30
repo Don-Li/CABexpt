@@ -9,12 +9,14 @@ setup(
     url = "https://github.com/Don-Li/CABexpt",
     license = "GPL 3",
     packages = ["CABexpt"],
+    author = "Don Li, Stephanie Gomes-Ng",
+    author_email = "yli877@aucklanduni.ac.nz, sng089@aucklanduni.ac.nz",    
     install_requires = [
-        'time',
-        'pigpio',
-        'sys',
-        'numpy',
-        'os'
+        "time",
+        "pigpio",
+        "sys",
+        "numpy",
+        "os"
         ],
-    dependency_links = "https://github.com/Don-Li/CABexpt"
+    dependency_links = ["https://github.com/Don-Li/CABexpt"]
     )
