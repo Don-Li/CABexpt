@@ -3,7 +3,7 @@
 import os
 import time
 
-def update_logs( time, entry ):
+def update_log( time, entry ):
     log_file = open( "/home/pi/Experiment/log.txt", "a" )
     log_message = "%s,%s" % (time, entry)
     log_file.write( log_message )
@@ -15,7 +15,7 @@ def make_new_log():
     log_file = open( log_file_name, "w" )
     log_file.close()
 
-def start_new_log():
+def restart_log():
     directory = "/home/pi/Experiment/"
     log_directory = "%slog.txt" % (directory)
     
