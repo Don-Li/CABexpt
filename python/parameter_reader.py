@@ -4,7 +4,20 @@ import numpy as np
 import log_file
 
 class parameter_manager(object):
-    """Parameter manager"""
+    """
+    Parameter manager
+    A class for managing the parameter values for an experiment.
+    Attributes:
+        self.Conditions
+            A list containing all the condition names in the parameter file.
+        self.Parameters
+            A list containing all the 
+        self.Repeats
+        self.Condition_now
+        self.Condition_now_name
+        self.Parameters_now
+        self.Parameter_names
+    """
     
     def __init__( self ):
         self.Conditions = []
