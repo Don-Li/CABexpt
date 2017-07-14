@@ -2,6 +2,7 @@
 import csv
 import numpy as np
 import log_file
+import clock
 
 class parameter_manager(object):
     """
@@ -74,5 +75,5 @@ def assign_params():
         assignments.append( assignment_str )
 
     # Make a record in the log file
-    date = time.strftime( "%H_%M_%d_%m_%Y" )
+    date = clock.get_date_hmdmy()
     log_file.update_logs( date, assignments )

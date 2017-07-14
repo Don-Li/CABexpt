@@ -41,3 +41,9 @@ def get_date_hm():
     Return the time in hh.mm format as a string.
     """
     return( time.strftime( "%H.%M" ) )
+
+def get_date_hmdmy():
+    """
+    Return the time in hh_mm_dd_mm_yyy format as a string
+    """
+    return( time.strftime( "%H_%M_%d_%m_%Y" ) )
