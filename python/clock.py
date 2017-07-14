@@ -29,3 +29,15 @@ class clock(object):
             while time.time() - t1 < seconds:
                 pass
         return( self.update() )
+
+def get_date_dmy():
+    """
+    Return the date in dd.mm.yyyy format as a string.
+    """
+    return( time.strftime( "%d.%m.%Y" ) )
+
+def get_date_hm():
+    """
+    Return the time in hh.mm format as a string.
+    """
+    return( time.strftime( "%H.%M" ) )
