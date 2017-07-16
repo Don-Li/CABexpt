@@ -1,7 +1,7 @@
 # Functions for the log file
 
 import os
-import time
+import clock
 
 def update_log( time, entry ):
     log_file = open( "/home/pi/Experiment/log.txt", "a" )
@@ -19,7 +19,7 @@ def restart_log():
     directory = "/home/pi/Experiment/"
     log_directory = "%slog.txt" % (directory)
     
-    date = time.strftime( "%H_%M_%d_%m_%Y" )
+    date = clock.get_date_hmdmy()
 
     name_for_old_log = "%slog_ended_%s" % (directory, date)
 

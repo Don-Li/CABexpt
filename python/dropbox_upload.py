@@ -1,6 +1,6 @@
 # Dropbox uploader
 
-import time
+import clock
 from log_file import update_logs
 from subprocess import check_output
 
@@ -14,7 +14,7 @@ def dropbox_upload( remote_directory, file_path ):
     os_print = check_output( os_call, shell = True, universal_newlines = True )
     print( os_print )
 
-    date = time.strftime( "%H_%M_%d_%m_%Y" )
+    date = clock.get_date_hmdmy()
     update_logs( date, os_print )
 
 

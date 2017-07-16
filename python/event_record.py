@@ -1,6 +1,7 @@
 import time
 import csv
 import os
+import clock
 
 class event_record(object):
     """This is an event record"""
@@ -25,12 +26,12 @@ class event_record(object):
         self.event_record.append( event_info )
 
     def set_end_date( self ):
-        self.end_date = time.strftime( "%d.%m.%Y" )
-        self.end_time = time.strftime( "%H.%M" )
+        self.end_date = clock.get_date_dmy()
+        self.end_time = clock.get_date_hm()
     
     def set_start_date( self ):
-        self.start_date = time.strftime( "%d.%m.%Y" )
-        self.start_time = time.strftime( "%H.%M" )
+        self.start_date = clock.get_date_dmy()
+        self.start_time = clock.get_date_hm()
 
     def save_csv( self, extra_array_names = None, extra_arrays = None ):
         
