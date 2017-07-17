@@ -6,8 +6,10 @@ import os
 import dropbox_download
 from glob import glob
 
-def read_experiment():
-	directory = "/home/pi/Experiment"
+def read_experiment( dirctory ):
+    """
+    Return a dictionary
+    """
 	files = os.chdir( directory )
 	# .expt is the file extension for the experiment details
 	expt_file = glob("%s/*.expt" % directory)

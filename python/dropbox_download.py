@@ -20,10 +20,3 @@ def dropbox_download( remote_file_path, local_directory ):
     print( os_print )
 
     os.system( os_call )
-    
-def param_download( param_file ):
-    local_directory = "/home/pi/Experiment"
-    remote_directory = ""
-    file_path = "%s%s" % ( remote_directory, param_file )
-
-    dropbox_download( remote_file_path, local_directory )

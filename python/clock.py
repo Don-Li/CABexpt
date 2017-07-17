@@ -17,6 +17,12 @@ class clock(object):
         self.time_now += self.tickDiff( self.gpio_time_1, self.gpio_time_2 )/1000000.0
         self.gpio_time_1 = self.gpio_time_2
         return( self.time_now )
+        
+    def assert_update( self, gpio_time_2 ):
+        self.gpio_time_2 = gpio_time_2
+        self.time_now += self.tickDiff( self.gpio_time_1, self.gpio_time_2 )/1000000.0
+        self.gpio_time_1 = self.gpio_time_2
+        return( self.time_now )
 
     def get_time( self ):
         return( self.time_now )
