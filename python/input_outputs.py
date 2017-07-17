@@ -51,7 +51,8 @@ class stimulus( stimulus_operandum ):
         self.on( stimuli )
 
 class operandum( stimulus_operandum ):
-    """Inputs
+    """
+    Inputs
     Slots:
         name_to_number: A dictionary that maps response labels to their GPIO number.
         number_to_name: The reverse dictionary of name_to_number.
@@ -61,13 +62,15 @@ class operandum( stimulus_operandum ):
         PUD: pigpio.PUD_DOWN or pigpio.PUD_UP. Pull resistance up or down, recommend pigpio.PUD_DOWN
     """
 
-    def __init__( self, definition_dict, pigpio_pi, bounce, PUD ):
+    def __init__( self, definition_dict, pigpio_pi, bounce, PUD, clock ):
         stimulus_operandum.__init__( self, definition_dict, pigpio_pi )
         self.bounce = bounce
         self.PUD = PUD
         self.monitor = self.name_to_number.fromkeys( self.name_to_number.keys(), None )
         self.key_on = None
+        self.clock = None
         self.setup()
+        
         
     def setup( self ):
         for key, value in self.name_to_number.items():
@@ -86,6 +89,7 @@ class operandum( stimulus_operandum ):
 
     def callback( self, gpio, level, tick ):
         self.key_on = self.number_to_name[ gpio ]
+        self.clock.assert_update( tick )
         print( self.key_on )
 
     def key_pressed( self ):
