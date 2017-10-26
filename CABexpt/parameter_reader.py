@@ -47,7 +47,7 @@ def read_params( subject, file_path ):
                 self.Conditions.append( row[0][1:] )
                 self.Repeats.append( int( row(subject_columns) ) )
             else:
-                self.Parameters.append( row[subject_column] ]
+                self.Parameters.append( row[subject_column] )
                 self.Parameter_names.append( row[0] )
 
 def set_param_now():

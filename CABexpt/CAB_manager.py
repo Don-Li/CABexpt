@@ -10,15 +10,14 @@ import clock
 class CABmanager(object):
     """CAB manager"""
     
-    def __init__( self, expt_local_directory = None ):
+    def __init__( self, subject_name ):
         
-        if expt_local_directory == None:
-            expt_local_directory = "/home/pi/Experiment"
-            
+        expt_local_directory = "/home/pi/Experiment"
+        
         os.system( "sudo pigpiod" )
         
         # Get the subject name
-        self.subject_name = get_subject_name()
+        self.subject_name = subject_name
         
         # Download files in the "experiment" remote directory
         experiment_reader.clone_experiment_folder( expt_local_directory )

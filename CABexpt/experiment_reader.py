@@ -10,11 +10,11 @@ def read_experiment( dirctory ):
     """
     Return a dictionary
     """
-	files = os.chdir( directory )
-	# .expt is the file extension for the experiment details
-	expt_file = glob("%s/*.expt" % directory)
-	file_path = directory + expt_file[0]
-	return( file_reader.read_one_col_csv( file_path ) )
+    files = os.chdir( directory )
+    # .expt is the file extension for the experiment details
+    expt_file = glob("%s/*.expt" % directory)
+    file_path = directory + expt_file[0]
+    return( file_reader.read_one_col_csv( file_path ) )
 
 def clone_experiment_folder( directory ):
     original_wd = os.getcwd()

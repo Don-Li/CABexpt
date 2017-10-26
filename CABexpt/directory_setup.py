@@ -7,12 +7,12 @@ import identity
 def setup_directory():
 
     # Always use this directory
-    directory = "/home/pigeonpi/experiment/"
+    directory = "/home/pi/experiment/"
     os.chdir( directory )
 
     # Read the "identity.txt" file    
     # "identity.txt" will contain the subject name, experiment name, and whether setup has already been done.    
-	identity = identity.read_identity()
+    identity = identity.read_identity()
 
     # Always use these folders
     folders = ["data","log"]

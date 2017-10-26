@@ -1,6 +1,6 @@
 from subprocess import check_output
 
-read_temp = function():
+def read_temp():
     
     """
     Description:
