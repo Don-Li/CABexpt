@@ -1,7 +1,7 @@
 # Dropbox downloader
 
 import time
-from log_file import update_logs
+from log_file import update_log
 from subprocess import check_output
 import clock
 
