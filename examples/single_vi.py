@@ -1,26 +1,23 @@
 # External module imports
 import time
 import pigpio
-import sys
 import numpy as np
 import event_record as er
 import os
 import input_outputs as io
 import clock as c
 
-#### Experiment meta data ####
-subject = "testpi"
-experiment_name = "concurrent_vivi"
-
-##### Set up gpio ####
-os.system( "sudo pigpiod" )
-time.sleep(0.1)
-pi = pigpio.pi()
+##### Set up experiment manager #####
+subject = "testsubject"
+parameter_file = "parameters.csv"
+session_info_file = "session_info.csv"
+directory = "/home/pi/Experiment"
+expt_manager = CABmanager( subject , parameter_file, session_info_file, directory )
 # Pin Definitons:
 output_definitions ={
-	"green1": 17, "red1": 16, "yellow1": 13, "blue1": 12,
-	"green2": 18, "red2": 19, "yellow2": 20, "blue2": 21,
-	"mag1":25
+    green1": 17, "red1": 16, "yellow1": 13, "blue1": 12,
+    "green2": 18, "red2": 19, "yellow2": 20, "blue2": 21,
+    "mag1":25
 }
 input_definitions = {"key1": 22, "key2": 23, "key3": 24}
 # Set up stimulus class
@@ -41,44 +38,43 @@ iri = 4
 end_time = 3600 # seconds
 clock = c.clock()
 
+# Have a 0.01s delay
+while clock.update() < 0.01:
+inputs.key_reset()
+
 #### Procedure ####
 try:
-	# Have a 0.01s delay
-	while clock.update() < 0.01:
-		inputs.key_reset()
-	rft_time = clock.update() + iri
-	print( "rft_time " + str(rft_time) )
-	# Main procedure
-	while clock.update() < end_time:
-		outputs.on( keylights )
-		if inputs.key_pressed():
-			time_now = clock.update()
-			my_events.record( event = inputs.get_key(), time = time_now )
-			print( str(my_events.time[-1]) + " " + my_events.event[-1] )
-			if time_now >= rft_time:
-				outputs.off( keylights )
-				outputs.on( maglight )
-				my_events.record( event = "food", time = time_now )
-				time.sleep( rft_duration )
-				outputs.off( maglight )
-				rft_time = clock.update() + iri
-				print( "next rft" + str(rft_time) )
-			inputs.key_reset()
-	my_events.record( event = "session_end", time = clock.update() )
-	outputs.off( maglight )
-	
-			
+    rft_time = clock.update() + iri
+    print( "rft_time " + str(rft_time) )
+    # Main procedure
+    outputs.on( keylights )
+    while clock.update() < end_time:
+        if inputs.key_pressed():
+            time_now = clock.update()
+            my_events.record( event = inputs.get_key(), time = time_now )
+            print( str(my_events.time[-1]) + " " + my_events.event[-1] )
+            if time_now >= rft_time:
+                outputs.off( keylights )
+                outputs.on( maglight )
+                my_events.record( event = "food", time = time_now )
+                time.sleep( rft_duration )
+                outputs.off( maglight )
+                rft_time = clock.update() + iri
+                print( "next rft" + str(rft_time) )
+                inputs.key_reset()
+                outputs.on( keylights )
+    my_events.record( event = "session_end", time = clock.update() )
+    outputs.off( maglight )
+
 except KeyboardInterrupt:
-	my_events.record( event = "session_end", time = clock.update() )
-	outputs.off( maglight )
-	print("")
-	pass
+    my_events.record( event = "session_end", time = clock.update() )
+    outputs.off( maglight )
+    print("")
+    pass
 
 #### Clean up gpios ####
 inputs.teardown()
 outputs.all_off()
-pi.stop()
-os.system( "sudo killall pigpiod" )
 
 #### Clean up and save event record ####
 my_events.set_end_date()

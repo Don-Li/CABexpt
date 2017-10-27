@@ -53,6 +53,9 @@ class stimulus( stimulus_operandum ):
 
     def read( self, stimuli ):
         return( { stimulus: self.status[stimulus] for stimulus in stimuli } )
+        
+    def read1( self, stimulus ):
+        return( self.status[stimulus] )
 
     def all_off( self ):
         stimuli = self.name_to_number.keys()
@@ -77,7 +80,7 @@ class operandum( stimulus_operandum ):
         stimulus_operandum.__init__( self, definition_dict, pigpio_pi )
         self.bounce = bounce
         self.monitor = self.name_to_number.fromkeys( self.name_to_number.keys(), None )
-        self.key_on = False
+        self.key_on = None
         self.clock = None
         self.setup()
         
@@ -93,7 +96,7 @@ class operandum( stimulus_operandum ):
             self.monitor[operandum].cancel()
 
     def key_reset( self ):
-        self.key_on = False
+        self.key_on = None
 
     def callback( self, gpio, level, tick ):
         self.key_on = self.number_to_name[ gpio ]
