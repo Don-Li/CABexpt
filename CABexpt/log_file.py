@@ -3,18 +3,18 @@
 import os
 import clock
 
-def update_log( time, entry, directory = "/home/pi/Experiment/log.txt"):
-    log_file = open( directory, "a" )
+def update_log( time, entry, directory ):
+    log_file = open( directory + "/log.txt", "a" )
     log_message = "%s,%s\n" % (time, entry)
     log_file.write( log_message )
     log_file.close()
 
-def make_new_log( directory = "/home/pi/Experiment/" ):
+def make_new_log( directory ):
     log_file_name = "%slog.txt\n" % (directory)
     log_file = open( log_file_name, "w" )
     log_file.close()
 
-def restart_log( directory = "/home/pi/Experiment/" ):
+def restart_log( directory ):
     log_directory = "%slog.txt\n" % (directory)
     
     date = clock.get_date_hmdmy()
