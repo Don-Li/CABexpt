@@ -18,10 +18,12 @@ class event_record(object):
         self.session = None
         self.parameters = None
         self.experiment_name = experiment_name
+        self.directory = None
         
         if ( CABmanager != None ):
             self.subject = CABmanager.subject
             self.session = CABmanager.session
+            self.directory = CABmanager.directory
 
     # Separate record and record_extra for speed
     def record( self, event, time ):
@@ -51,10 +53,10 @@ class event_record(object):
         self.start_date = clock.get_date_dmy()
         self.start_time = clock.get_date_hm()
 
-    def save_csv( self, directory, extra_array_names = None, extra_arrays = None ):
+    def save_csv( self, directory = None, extra_array_names = None, extra_arrays = None ):
         
         if ( extra_arrays != None and extra_array_names == None ):
-            raise ValueError( "Enter a list of array names assocaited with 'extra_arrays'.")
+            raise ValueError( "Enter a list of array names associated with 'extra_arrays'.")
         if ( extra_arrays == None and extra_array_names != None ):
             raise ValueError( "Names for 'extra_arrays' entered, but no extra arrays.")
         
@@ -68,7 +70,10 @@ class event_record(object):
         session = str( self.session )
         ###########################
         
+        
         self.file_name = "%s_%s_%s_%s.csv" % ( start_date, start_time, subject, experiment_name )
+        if directory != None:
+            self.file_name = directory + self.file_name
         
         ##### Organise meta data and extend if needed for extra events #####
         time_event_column = [ "Time", "Event" ]
@@ -96,7 +101,7 @@ class event_record(object):
                     writer.writerows( zip( extra_arrays[array] ) )
         
         msg = " subject %s, session %s, saved event record" % ( subject, session )
-        log_file.update_log( time = clock.get_date_hmdmy(), entry = msg, directory = directory )
+        log_file.update_log( time = clock.get_date_hmdmy(), entry = msg, directory = self.directory )
 
     def dropbox_sync( self ):
         upload_script = "/home/pi/Dropbox-Uploader/dropbox_uploader.sh upload "
