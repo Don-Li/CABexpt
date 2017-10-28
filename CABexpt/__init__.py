@@ -4,15 +4,15 @@
 import os
 import sys
 
-current_wd = os.getcwd() + "/CABexpt"
-if current_wd not in sys.path:
-    sys.path.append( current_wd )
+init_location = os.path.dirname(__file__)
+if init_location not in sys.path:
+    sys.path.append( init_location )
 
-import event_record
-import input_outputs
-import clock
-import directory_setup
-import dropbox_download
-import temperature
+from event_record import *
+from input_outputs import *
+from clock import *
+from directory_setup import *
+from dropbox_download import *
+from temperature import *
 
 # __all__ is a list that contains all modules to be imported with *
