@@ -103,7 +103,7 @@ class operandum( stimulus_operandum ):
         self.clock.assert_update( tick )
 
     def key_pressed( self ):
-        return( self.key_on )
+        return( self.key_on != None )
 
     def get_key( self ):
         return( self.key_on )
