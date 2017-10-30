@@ -1,5 +1,4 @@
-﻿import os
-import csv
+﻿from csv import reader
 import numpy as np
 import log_file
 import clock
@@ -35,7 +34,7 @@ class parameter_manager(object):
 
 def read_params( subject, file_path ):
     with open( file_path, "r" ) as file:
-        csv_file = csv.reader( file, delimiter = "," )
+        csv_file = reader( file, delimiter = "," )
     
         # First row is always a header
         header = csv_file.__next__()

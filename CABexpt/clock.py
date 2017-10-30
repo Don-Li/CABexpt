@@ -1,4 +1,4 @@
-import time
+from time import strftime, monotonic
 import pigpio
 import CABmanager
 
@@ -40,13 +40,13 @@ class clock(object):
 
     def sleep( self, seconds ):
         if seconds <= 0.5:
-            t1 = time.monotonic()
-            while time.monotonic() - t1 < seconds:
+            t1 = monotonic()
+            while monotonic() - t1 < seconds:
                 pass
         else:
-            t1 = time.monotonic()
-            time.sleep( seconds - 0.4 )
-            while time.monotonic() - t1 < seconds:
+            t1 = monotonic()
+            sleep( seconds - 0.4 )
+            while monotonic() - t1 < seconds:
                 pass
         return( self.update() )
 
@@ -54,16 +54,16 @@ def get_date_dmy():
     """
     Return the date in dd.mm.yyyy format as a string.
     """
-    return( time.strftime( "%d.%m.%Y" ) )
+    return( strftime( "%d.%m.%Y" ) )
 
 def get_date_hm():
     """
     Return the time in hh.mm format as a string.
     """
-    return( time.strftime( "%H.%M" ) )
+    return( strftime( "%H.%M" ) )
 
 def get_date_hmdmy():
     """
     Return the time in hh_mm_dd_mm_yyy format as a string
     """
-    return( time.strftime( "%H_%M_%d_%m_%Y" ) )
+    return( strftime( "%H_%M_%d_%m_%Y" ) )

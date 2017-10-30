@@ -1,9 +1,9 @@
 import experiment_reader
-import os
+from os import chdir, system
 import pigpio
 from clock import get_date_hmdmy
 import log_file
-import time
+from time import sleep
 
 class CABmanager(object):
     """CAB manager"""
@@ -16,7 +16,7 @@ class CABmanager(object):
                  directory = "/home/pi/Experiment",
                  windows_test = False):
         
-        os.chdir( directory )
+        chdir( directory )
         self.directory = directory
         msg = " start experiment, subject %s, session %s" % ( subject, session )
         log_file.update_log( get_date_hmdmy(), msg, directory )
@@ -32,8 +32,8 @@ class CABmanager(object):
         if ( not windows_test ):
             msg = " start pigpiod"
             log_file.update_log( get_date_hmdmy(), msg, directory )
-            os.system( "sudo pigpiod" )
-            time.sleep( 0.1 )
+            system( "sudo pigpiod" )
+            sleep( 0.1 )
             
             msg = " make pigpio.pi"
             log_file.update_log( get_date_hmdmy(), msg, directory )
@@ -57,7 +57,7 @@ class CABmanager(object):
         self.pi.stop()
         
         msg = "stop pigpiod"
-        os.system( "sudo killall pigpiod" )
+        system( "sudo killall pigpiod" )
         log_file.update_log( get_date_hmdmy(), msg, self.directory )
         
         msg = " stop experiment, subject %s, session %s" % ( self.subject, self.session )
