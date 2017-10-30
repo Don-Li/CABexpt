@@ -60,6 +60,6 @@ class CABmanager(object):
         os.system( "sudo killall pigpiod" )
         log_file.update_log( get_date_hmdmy(), msg, self.directory )
         
-        msg = " stop experiment, subject %s, session %s" % ( subject, session )
+        msg = " stop experiment, subject %s, session %s" % ( self.subject, self.session )
         log_file.update_log( get_date_hmdmy(), msg, self.directory )
         
