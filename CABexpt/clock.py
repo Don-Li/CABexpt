@@ -1,5 +1,6 @@
 import time
 import pigpio
+import CABmanager
 
 class clock(object):
     """Clock"""
