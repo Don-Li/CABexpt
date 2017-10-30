@@ -1,14 +1,14 @@
 # Set up directories
 
-import os
-import csv
+from os import chdir, path.exists, makedirs
+from csv import writer
 import identity
 
 def setup_directory():
 
     # Always use this directory
     directory = "/home/pi/experiment/"
-    os.chdir( directory )
+    chdir( directory )
 
     # Read the "identity.txt" file    
     # "identity.txt" will contain the subject name, experiment name, and whether setup has already been done.    
@@ -22,16 +22,16 @@ def setup_directory():
 
     if identity["setup"] == "False":
         for folder in folders:
-            if os.path.exists( folder ):
+            if path.exists( folder ):
                 raise NameError( "Attempting setup but %s already exists" % folder )
             else:
                 print( "Constructing '%s' folder" % ( folder ) )
-                os.makedirs(folder)
+                makedirs(folder)
 
     # Set identity to True in "identity.txt"
     identity[ "setup" ] = "True"
 
     # Write "identity.txt"
     with open( "identity.txt", "w" ) as file:
-        writer = csv.writer( file )
+        writer = writer( file )
         writer.writerows( identity.items() )

@@ -1,5 +1,5 @@
-import csv
-import os
+from csv import writer
+from os import getcwd, system
 import clock
 import log_file
 
@@ -92,7 +92,7 @@ class event_record(object):
             ]
 
         with open( self.file_name, "w" ) as file:
-            writer = csv.writer( file, delimiter = ",", lineterminator = "\n")
+            writer = writer( file, delimiter = ",", lineterminator = "\n")
             writer.writerows( meta_data )
             writer.writerows( self.event_record )
             if extra_arrays != None:

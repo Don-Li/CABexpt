@@ -1,8 +1,8 @@
 # Experiment details reader
 
-import csv
+from csv import reader
 import file_reader
-import os
+from os import getcwd, chdir
 import log_file
 from clock import get_date_hmdmy
 from glob import glob
@@ -11,19 +11,19 @@ def read_experiment( dirctory ):
     """
     Read a CSV file and return a dictionary of parameters
     """
-    files = os.chdir( directory )
+    files = chdir( directory )
     # .expt is the file extension for the experiment details
     expt_file = glob("%s/*.expt" % directory)
     file_path = directory + expt_file[0]
     return( file_reader.read_one_col_csv( file_path ) )
 
 def clone_experiment_folder( directory ):
-    original_wd = os.getcwd()
-    file_names = os.chdir( directory )
+    original_wd = getcwd()
+    file_names = chdir( directory )
     for file in file_names:
         file_to_download = "/experiment" + file_names[file]
         dropbox_download.dropbox_download( file_to_download, "/home/pi/Experiment" )
-    os.chdir( original_wd )
+    chdir( original_wd )
 
 def read_experiment_params( subject, session, file_name, directory ):
     """ Read a CSV file and return a dictionary of parameters """
@@ -33,7 +33,7 @@ def read_experiment_params( subject, session, file_name, directory ):
     log_file.update_log( time = get_date_hmdmy(), entry = msg, directory = directory )
     
     with open( file_name, mode = "r" ) as file:
-        csv_file= csv.reader( file, delimiter = "," )
+        csv_file= reader( file, delimiter = "," )
         
         # First row is always a header
         # Always has "subject" and "session"
@@ -82,7 +82,7 @@ def read_session_info( subject, file_name, directory ):
     """ Read session information """
     
     with open( file_name, mode = "r" ) as file:
-        csv_file = csv.reader( file, delimiter = "," )
+        csv_file = reader( file, delimiter = "," )
         
         # First row is always a header
         # Always has "subject" and "session"
