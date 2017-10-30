@@ -11,8 +11,7 @@ if init_location not in sys.path:
 from event_record import *
 from input_outputs import *
 from clock import *
-from directory_setup import *
-from dropbox_download import *
 from temperature import *
+from CAB_manager import *
 
 # __all__ is a list that contains all modules to be imported with *
