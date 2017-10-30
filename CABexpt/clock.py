@@ -4,8 +4,13 @@ import pigpio
 class clock(object):
     """Clock"""
 
-    def __init__( self, pi ):
-        self.pi = pi
+    def __init__( self, pigpio_pi ):
+    
+        if type( pigpio_pi ) is CAB_manager.CABmanager:
+            self.pigpio_pi = pigpio_pi.pi
+        else:
+            self.pigpio_pi = pigpio_pi
+    
         self.tickDiff = pigpio.tickDiff
         self.get_current_tick = pi.get_current_tick
         self.gpio_time_1 = self.get_current_tick()
