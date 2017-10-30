@@ -30,12 +30,12 @@ class CABmanager(object):
         self.session = session
         
         if ( not windows_test ):
-            msg = "start pigpiod"
+            msg = " start pigpiod"
             log_file.update_log( get_date_hmdmy(), msg, directory )
             os.system( "sudo pigpiod" )
             time.sleep( 0.1 )
             
-            msg = "make pigpio.pi"
+            msg = " make pigpio.pi"
             log_file.update_log( get_date_hmdmy(), msg, directory )
             # Make the pigpio.pi object
             self.pi = pigpio.pi()
@@ -53,7 +53,7 @@ class CABmanager(object):
     
     def teardown( self ):
         msg = "stop pigpio.pi"
-        log_file.update_log( get_date_hmdmy(), msg, directory )
+        log_file.update_log( get_date_hmdmy(), msg, self.directory )
         self.pi.stop()
         
         msg = "stop pigpiod"
